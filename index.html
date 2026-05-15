@@ -1,102 +1,61 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    
-    
     <title>涩图_R-18</title>
-        
-    <!-- Manifest -->
     <link rel="manifest" href="/manifest.json?t=12345">
-
-    <!-- Theme color -->
     <meta name="theme-color" content="#000000">
-
-    <!-- Icons for browser tab -->
     <link rel="icon" href="/img/00.png" sizes="192x192">
-    
-
-    
     <style>
-    
         body {
-            
-background-color: #000000; /* 纯黑 */
-
-
-
-
+            background-color: #000000;
             color: white;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
-        
-        
- /* 顶部图片样式 */
         #top-image-container {
             text-align: center;
-            margin: 1em 0; /* 距离顶部和下方内容保持1行的间隙 */
+            margin: 1em 0;
         }
-
         #top-image {
             object-fit: cover;
             display: block;
             margin: 0 auto;
             width: auto;
-            height: 9/16; /* 固定比例 */
-            border-radius: 10px; /* 添加10px圆角 */
+            height: 9/16;
+            border-radius: 10px;
         }
-
-        /* 手机竖屏 */
         @media (max-width: 767px) {
             #top-image {
-                height: 22vh; /* 高度占屏幕的1/4 */
-                width: calc(22vh * 2); /* 根据高度调整宽度 */
-                border-radius: 10px; /* 保持圆角 */
+                height: 22vh;
+                width: calc(22vh * 2);
+                border-radius: 10px;
             }
         }
-
-        /* iPad竖屏 */
         @media (min-width: 768px) and (max-width: 1023px) {
             #top-image {
-                height: 22vh; /* 高度占屏幕的1/3 */
-                width: calc(22vh * 2); /* 根据高度调整宽度 */
-                border-radius: 10px; /* 保持圆角 */
+                height: 22vh;
+                width: calc(22vh * 2);
+                border-radius: 10px;
             }
         }
-
-        /* iPad横屏 */
         @media (min-width: 1024px) and (max-width: 1279px) {
             #top-image {
-                height: 36vh; /* 高度占屏幕的1/2 */
-                width: calc(36vh * 2.5); /* 根据高度调整宽度 */
-                border-radius: 10px; /* 保持圆角 */
+                height: 36vh;
+                width: calc(36vh * 2.5);
+                border-radius: 10px;
             }
         }
-
-
-
-
-
-
-
-
-
-
         .section {
             padding: 5px 20px;
         }
-
         p {
             text-indent: 2em;
             margin: 5px 0;
         }
-
         .media-row {
             display: flex;
             overflow-x: auto;
@@ -104,51 +63,44 @@ background-color: #000000; /* 纯黑 */
             gap: 10px;
             cursor: grab;
         }
-
         .media-row img, .media-row .video-container {
             width: calc(100vw / 3.3 - 15px);
-            aspect-ratio: 3 / 4;  /* 使用 aspect-ratio 来保持宽高比 */
+            aspect-ratio: 3 / 4;
             object-fit: cover;
-            object-position: center center; /* 垂直和水平都居中裁剪 */
+            object-position: center center;
             border-radius: 5px;
             cursor: pointer;
         }
-
-        @media (min-width: 768px) and (max-width: 1023px) { /* iPad竖屏 */
+        @media (min-width: 768px) and (max-width: 1023px) {
             .media-row img, .media-row .video-container {
                 width: calc(100vw / 4.3 - 15px);
                 height: calc((100vw / 4.3 - 15px) * 4 / 3);
             }
         }
-
-        @media (min-width: 1024px) and (max-width: 1279px) { /* iPad横屏 */
+        @media (min-width: 1024px) and (max-width: 1279px) {
             .media-row img, .media-row .video-container {
                 width: calc(100vw / 6.3 - 15px);
                 height: calc((100vw / 6.3 - 15px) * 4 / 3);
             }
         }
-
-        @media (min-width: 1280px) { /* 电脑 */
+        @media (min-width: 1280px) {
             .media-row img, .media-row .video-container {
                 width: calc(100vw / 10 - 15px);
                 height: calc((100vw / 10 - 15px) * 4 / 3);
             }
         }
-
         .video-container {
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         .video-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 5px;
         }
-
         .video-container video {
             position: absolute;
             width: 100%;
@@ -157,7 +109,6 @@ background-color: #000000; /* 纯黑 */
             border-radius: 5px;
             display: none;
         }
-
         .fullscreen {
             display: none;
             position: fixed;
@@ -169,41 +120,31 @@ background-color: #000000; /* 纯黑 */
             justify-content: center;
             align-items: center;
         }
-
-.fullscreen img, .fullscreen video {
-    max-width: 95%;
-    max-height: 95%;
-    object-fit: contain; /* 保持图像/视频比例，并适应容器 */
-    border-radius: 5px;
-}
-
-
-
-
+        .fullscreen img, .fullscreen video {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            border-radius: 5px;
+        }
         .fullscreen.active {
             display: flex;
             animation: fadeIn 0.3s forwards;
         }
-
         .fullscreen.inactive {
             animation: fadeOut 0.3s forwards;
             display: flex;
         }
-
         .hide-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
-
         @keyframes fadeIn {
             from {opacity: 0;}
             to {opacity: 1;}
         }
-
         @keyframes fadeOut {
             from {opacity: 1;}
             to {opacity: 0;}
@@ -212,214 +153,177 @@ background-color: #000000; /* 纯黑 */
 </head>
 <body>
     <div id="top-image-container">
-<img id="top-image" src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEUHpFqBwV6WIA4Nw8x2GWeezdbHJYN0AACXSEAAt1aOFQG8Dz3_NvA4jsE.jpg" alt="顶部图片">
+        <img id="top-image" src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEUHpFqBwV6WIA4Nw8x2GWeezdbHJYN0AACXSEAAt1aOFQG8Dz3_NvA4jsE.jpg" alt="顶部图片">
+    </div>
+    <p>26.5.15</p>
+    <div class='section media-row hide-scrollbar'>
+        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEUIZFqB01-K5l1uFBiA3R8lsm9YFRu8AAC_iQAAt1aOFRfcCA0y9LfpDsE.jpg" alt="image1">
+        <img src="img/00035.jpg" alt="image2">
+        <img src="img/00036.jpg" alt="image3">
+        <img src="img/00037.jpg" alt="image4">
+    </div>
 
+    <div id="fullscreen" class="fullscreen" onclick="closeFullscreen(event)">
+        <img id="fullscreen-image" src="" alt="fullscreen">
+        <video id="fullscreen-video" controls></video>
+    </div>
 
-<p>26.5.15</p>
-<div class='section media-row hide-scrollbar'>
-  <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEUIZFqB01-K5l1uFBiA3R8lsm9YFRu8AAC_iQAAt1aOFRfcCA0y9LfpDsE.jpg" alt="image1" />
-  <img src="img/00035.jpg" alt="image2" />
-  <img src="img/00036.jpg" alt="image3" />
-  <img src="img/00037.jpg" alt="image4" />
-</div>
+    <script>
+        let currentIndex = 0;
+        let mediaItems = [];
+        let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints;
 
-
-<div id="fullscreen" class="fullscreen" onclick="closeFullscreen(event)">
-    <img id="fullscreen-image" src="" alt="fullscreen">
-    <video id="fullscreen-video" controls></video>
-
-</div>
-
-
-
-<script>
-    let currentIndex = 0;
-let mediaItems = [];
-let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints;
-
-
-    
-    
-    // 打开全屏显示图片或视频
-    function openFullscreen(src, isVideo = false, index = 0) {
-        currentIndex = index;  // 记录当前的索引
-        const fullscreen = document.getElementById('fullscreen');
-        const img = document.getElementById('fullscreen-image');
-        const video = document.getElementById('fullscreen-video');
-
-        document.body.style.overflow = 'hidden';  // 禁用网页滚动
-
-        if (isVideo) {
-            img.style.display = 'none';
-            video.style.display = 'block';
-            video.src = src;
-            video.play();
-        } else {
-            video.style.display = 'none';
-            img.style.display = 'block';
-            img.src = src;
+        // 获取图片的真实地址（优先 data-src，否则 src）
+        function getImageSrc(imgElement) {
+            return imgElement.getAttribute('data-src') || imgElement.src;
         }
 
-        fullscreen.classList.remove('inactive');
-        fullscreen.classList.add('active');
-    }
+        // 打开全屏
+        function openFullscreen(src, isVideo = false, index = 0) {
+            currentIndex = index;
+            const fullscreen = document.getElementById('fullscreen');
+            const img = document.getElementById('fullscreen-image');
+            const video = document.getElementById('fullscreen-video');
 
-    // 关闭全屏
-    function closeFullscreen(event) {
-        const fullscreen = document.getElementById('fullscreen');
-        const img = document.getElementById('fullscreen-image');
-        const video = document.getElementById('fullscreen-video');
+            document.body.style.overflow = 'hidden';
 
-        // 点击视频不关闭
-        if (event.target !== fullscreen) return;
+            if (isVideo) {
+                img.style.display = 'none';
+                video.style.display = 'block';
+                video.src = src;
+                video.play();
+            } else {
+                video.style.display = 'none';
+                img.style.display = 'block';
+                img.src = src;
+            }
 
-        fullscreen.classList.remove('active');
-        fullscreen.classList.add('inactive');
-
-        document.body.style.overflow = '';  // 恢复网页滚动
-
-        setTimeout(() => {
             fullscreen.classList.remove('inactive');
-            img.src = '';
-            video.pause();
-            video.src = '';
-        }, 300);
-    }
+            fullscreen.classList.add('active');
+        }
 
-    // 切换到上一张或下一张
-function switchMedia(step) {
-    currentIndex += step;
+        // 关闭全屏
+        function closeFullscreen(event) {
+            const fullscreen = document.getElementById('fullscreen');
+            const img = document.getElementById('fullscreen-image');
+            const video = document.getElementById('fullscreen-video');
 
-    if (currentIndex < 0) {
-        currentIndex = mediaItems.length - 1; // 回到最后一张
-    } else if (currentIndex >= mediaItems.length) {
-        currentIndex = 0; // 回到第一张
-    }
+            if (event.target !== fullscreen) return;
 
-    const currentItem = mediaItems[currentIndex];
-    const dataSrc = currentItem.getAttribute('data-src');
+            fullscreen.classList.remove('active');
+            fullscreen.classList.add('inactive');
+            document.body.style.overflow = '';
 
-    if (dataSrc.includes('page')) {  // 如果路径中包含 'page'，则认为是视频封面
-        const videoSrc = dataSrc.replace('page', 'video').replace('.jpg', '.mp4');  // 替换路径以找到视频
-        openFullscreen(videoSrc, true, currentIndex);  // 显示视频
-    } else {  // 否则认为是普通图片
-        openFullscreen(dataSrc, false, currentIndex);  // 显示图片
-    }
-}
+            setTimeout(() => {
+                fullscreen.classList.remove('inactive');
+                img.src = '';
+                video.pause();
+                video.src = '';
+            }, 300);
+        }
 
+        // 切换媒体（上一张 / 下一张）
+        function switchMedia(step) {
+            currentIndex += step;
+            if (currentIndex < 0) currentIndex = mediaItems.length - 1;
+            if (currentIndex >= mediaItems.length) currentIndex = 0;
 
-    // 懒加载图片
-    document.addEventListener("DOMContentLoaded", function() {
-        let lazyloadImages = document.querySelectorAll(".lazyload");
-        let imageObserver = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    let image = entry.target;
-                    image.src = image.dataset.src;
-                    image.classList.remove("lazyload");
-                    imageObserver.unobserve(image);
+            const currentItem = mediaItems[currentIndex];
+            // 获取真实图片地址
+            let mediaUrl = getImageSrc(currentItem);
+            let isVideo = false;
+
+            // 简单判断：如果地址包含 'page' 且原图是封面，则当作视频处理（可根据实际需要调整）
+            if (mediaUrl.includes('page') && currentItem.tagName === 'IMG') {
+                isVideo = true;
+                mediaUrl = mediaUrl.replace('page', 'video').replace('.jpg', '.mp4');
+            }
+
+            openFullscreen(mediaUrl, isVideo, currentIndex);
+        }
+
+        // 滑动切换图片（移动端）
+        function slideImage(direction) {
+            const img = document.getElementById('fullscreen-image');
+            if (!img) return;
+
+            img.style.transition = 'transform 0.3s ease';
+            img.style.transform = `translateX(${-direction * 100}%)`;
+
+            setTimeout(() => {
+                switchMedia(direction);
+                img.style.transition = 'none';
+                img.style.transform = `translateX(${direction * 100}%)`;
+                setTimeout(() => {
+                    img.style.transition = 'transform 0.3s ease';
+                    img.style.transform = 'translateX(0)';
+                }, 20);
+            }, 150);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // 懒加载（可选，不影响主功能）
+            let lazyloadImages = document.querySelectorAll(".lazyload");
+            let imageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        let image = entry.target;
+                        image.src = image.dataset.src;
+                        image.classList.remove("lazyload");
+                        imageObserver.unobserve(image);
+                    }
+                });
+            });
+            lazyloadImages.forEach(function(image) {
+                imageObserver.observe(image);
+            });
+
+            // 收集 .media-row 内的所有图片（以及视频容器，这里先只处理图片）
+            mediaItems = Array.from(document.querySelectorAll('.media-row img'));
+
+            // 为每个图片绑定点击事件
+            mediaItems.forEach((item, idx) => {
+                item.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    let imgUrl = getImageSrc(item);
+                    let isVideo = false;
+                    // 如果图片地址包含 'page' 且需要转成视频（可根据实际规则调整）
+                    if (imgUrl.includes('page') && imgUrl.endsWith('.jpg')) {
+                        isVideo = true;
+                        imgUrl = imgUrl.replace('page', 'video').replace('.jpg', '.mp4');
+                    }
+                    openFullscreen(imgUrl, isVideo, idx);
+                });
+            });
+
+            // 键盘左右键支持
+            document.addEventListener('keydown', (e) => {
+                if (document.getElementById('fullscreen').classList.contains('active')) {
+                    if (e.key === 'ArrowRight') switchMedia(1);
+                    else if (e.key === 'ArrowLeft') switchMedia(-1);
                 }
             });
-        });
 
-        lazyloadImages.forEach(function(image) {
-            imageObserver.observe(image);
-        });
-
-        // 获取所有的图片和视频元素
-        mediaItems = Array.from(document.querySelectorAll('.media-row img, .media-row .video-container'));
-
-        // 为每个图片和视频添加点击事件
- mediaItems.forEach((item, index) => {
-    if (item.tagName === 'IMG') {
-        const dataSrc = item.getAttribute('data-src');
-        if (dataSrc.includes('page')) {  // 判断是否是视频封面
-            const videoSrc = dataSrc.replace('page', 'video').replace('.jpg', '.mp4');  // 替换路径
-            item.addEventListener('click', () => openFullscreen(videoSrc, true, index));  // 显示视频
-        } else {
-            item.addEventListener('click', () => openFullscreen(dataSrc, false, index));  // 显示图片
-        }
-    }
-});
-
-
-        // 键盘左右键监听
-        document.addEventListener('keydown', (e) => {
-            if (document.getElementById('fullscreen').classList.contains('active')) {
-                if (e.key === 'ArrowRight') {
-                    switchMedia(1); // 下一张
-                } else if (e.key === 'ArrowLeft') {
-                    switchMedia(-1); // 上一张
-                }
+            // 移动端滑动支持
+            if (isTouchDevice) {
+                let startX = null;
+                const fullscreenDiv = document.getElementById('fullscreen');
+                fullscreenDiv.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                });
+                fullscreenDiv.addEventListener('touchmove', (e) => {
+                    if (e.touches.length !== 1 || !startX) return;
+                    const diffX = e.touches[0].clientX - startX;
+                    if (Math.abs(diffX) > 60) {
+                        slideImage(diffX > 0 ? -1 : 1);
+                        startX = null;
+                    }
+                });
+                fullscreenDiv.addEventListener('touchend', () => {
+                    startX = null;
+                });
             }
         });
-
-        // 移动端滑动切换图片/视频
-if (isTouchDevice) {
-    let startX;
-    const fullscreen = document.getElementById('fullscreen');
-    const img = document.getElementById('fullscreen-image'); // 获取全屏显示的图片
-
-    fullscreen.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-    });
-
-    fullscreen.addEventListener('touchmove', (e) => {
-    // 只处理单点触控
-    if (e.touches.length !== 1) return;
-
-    if (!startX) return;
-
-    const touchX = e.touches[0].clientX;
-    const diffX = touchX - startX;  // 计算滑动距离
-
-    if (Math.abs(diffX) > 60) {
-        if (diffX < 0) {
-            slideImage(1);  // 向右滑动，显示前一张
-        } else {
-            slideImage(-1);   // 向左滑动，显示后一张
-        }
-        startX = null;  // 重置起始点
-    }
-    
-    });
-
-    fullscreen.addEventListener('touchend', () => {
-        startX = null;  // 滑动结束后重置
-    });
-
-    // 添加平移图片效果的函数
-// 添加平移图片效果的函数
-// 添加平移图片效果的函数
-function slideImage(direction) {
-    // 开始平移当前图片
-    img.style.transition = 'transform 0.5s ease';  // 让当前图片平移的动画稍长一点（比如0.4秒）
-    img.style.transform = `translateX(${-direction * 100}%)`;  // 当前图片平移出屏幕
-
-    // 设置切换图片的黑色间隙时间
-    setTimeout(() => {
-        switchMedia(direction);  // 切换图片
-
-        // 立即准备下一张图片从另一侧进入
-        img.style.transition = 'none';  // 先禁用过渡效果
-        img.style.transform = `translateX(${direction * 100}%)`;  // 新图片从另一侧准备进入
-
-        // 几乎立即重新启用动画，让新图片平滑进入屏幕
-        setTimeout(() => {
-            img.style.transition = 'transform 1.2s ease';  // 再次启用平滑动画，平移时间保持为0.4秒
-            img.style.transform = 'translateX(0)';  // 新图片平移回中心
-        }, 0);  // 设置非常短的延迟来切换新图片进入
-    }, 450);  // 黑色间隙的持续时间可以单独控制，比如100毫秒
-}
-
-
-}
-
-
-    });
-
-
-</script>
+    </script>
 </body>
 </html>
-
